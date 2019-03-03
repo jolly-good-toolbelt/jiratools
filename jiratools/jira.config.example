@@ -1,0 +1,15 @@
+[jira]
+JIRA_URL=https://jira.rax.io
+USERNAME=YOUR_USERNAME
+PASSWORD=YOUR_PASSWORD
+# Leave assignee blank for a default Unassigned JIRA
+DEFAULT_ASSIGNEE=%(USERNAME)s
+TEST_PROJECT=YOUR_QE_PROJECT
+DEFAULT_ISSUE_TYPE=Story
+DEFAULT_DESCRIPTION=Do necessary QE testing around the linked Dev JIRA
+# Summary can expect two values passed in to .format() - 1) dev_jira_id, 2) dev_jira_summary
+DEFAULT_SUMMARY=QE Testing for: {dev_jira_id} - {dev_jira_summary}
+# OPTIONAL VALUES: leave the below blank (or don't include at all) to not set by default
+WATCHERS=comma,separated,list
+DEFAULT_COMPONENTS=comma,separated,list
+DEFAULT_LABELS=comma,separated,list
