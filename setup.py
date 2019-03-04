@@ -6,7 +6,7 @@ DESCRIPTION = "Simple helpers to interface to JIRA from an API or command line."
 VERSION = None
 
 CONSOLE_SCRIPTS = [
-    "jira-test-story=jiratools:_create_test_jira_from",
+    "jira-make-linked-issue=jiratools:_create_test_jira_from",
     "jira-add-comment=jiratools:_cli_add_comment",
     "jira-example-config=jiratools:_example_config_install",
     "jira-search-issues=jiratools:_cli_search",
@@ -30,10 +30,15 @@ else:
     about["__version__"] = VERSION
 
 
+with open(os.path.join(here, "README.rst")) as f:
+    long_description = f.read()
+
+
 setuptools.setup(
     name=NAME,
     version=about["__version__"],
     description=DESCRIPTION,
+    long_description=long_description,
     url="https://github.com/bradsbrown/jiratools",
     author="Brad Brown",
     author_email="brad@bradsbrown.com",
