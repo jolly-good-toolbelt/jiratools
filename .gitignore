@@ -1,0 +1,7 @@
+# Distribution files
+build
+dist
+*.egg-info
+
+# VirtualEnv
+VENV
