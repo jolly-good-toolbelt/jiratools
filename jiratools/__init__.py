@@ -174,17 +174,19 @@ def _test_story_args():
     _load_config()
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument("jira_id")
-    parser.set_defaults(assign=bool(CONFIG["DEFAULT_ASSIGNEE"]))
+    assign_default = bool(CONFIG["DEFAULT_ASSIGNEE"])
     assignment = parser.add_mutually_exclusive_group()
     assignment.add_argument(
         "--assign",
         dest="assign",
+        default=assign_default,
         action="store_true",
         help="Assign story to user, current user if none provided.",
     )
     assignment.add_argument(
         "--no-assign",
         dest="assign",
+        default=not assign_default,
         action="store_false",
         help="Leave Test JIRA unassigned",
     )
