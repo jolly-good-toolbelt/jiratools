@@ -43,6 +43,37 @@ See ``--help`` on this command for details.
 ``jira-link-issues`` creates a link between two issues.
 The ``jira.config`` is needed to authenticate to JIRA.
 
+
+Error Logging Tools
+-------------------
+
+These functions are designed to be used within Python code
+to assist with various error commenting logic.
+
+* ``jiratools.error_logging.add_jira_error_comment`` can take an error
+  and add a formatted comment to a relevant JIRA issue
+
+* ``jiratools.error_logging.add_jira_comment_with_table`` can add a comment
+  with a formatted data table to a jira issue
+
+* ``jiratools.error_logging.update_jira_for_errors`` can check found errors
+  against a list of JIRA issues
+  and add comments to any JIRA issues where a match is found.
+
+
+Formatting Tools
+----------------
+
+These functions are designed to be used within Python code
+to assist with comment formatting logic.
+
+* ``jiratools.formatting.format_autoupdate_jira_msg`` takes a message body
+  and add relevant title/header data
+
+* ``jiratools.formatting.format_as_jira_table`` takes headers and table rows
+  and formats a JIRA-style table
+
+
 Examples
 ~~~~~~~~
 
