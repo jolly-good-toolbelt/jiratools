@@ -3,7 +3,7 @@ import os
 
 
 def _build_source():
-    return os.environ.get("BUILD_URL", f"Manual run by {getpass.getuser()}")
+    return os.environ.get("BUILD_URL", "Manual run by {}".format(getpass.getuser()))
 
 
 def format_autoupdate_jira_msg(message_body, header_body=None):
