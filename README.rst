@@ -44,6 +44,9 @@ See ``--help`` on this command for details.
 The ``jira.config`` is needed to authenticate to JIRA.
 
 
+``jira-update-assignee`` changes the assignee of the JIRA to the provided user.
+
+
 Error Logging Tools
 -------------------
 

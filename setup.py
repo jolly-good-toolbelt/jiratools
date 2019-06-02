@@ -11,6 +11,7 @@ CONSOLE_SCRIPTS = [
     "jira-example-config=jiratools:_example_config_install",
     "jira-search-issues=jiratools:_cli_search",
     "jira-link-issues=jiratools:cli_jira_link",
+    "jira-update-assignee=jiratools:_change_jira_assignee",
 ]
 
 INSTALL_REQUIRES = [
