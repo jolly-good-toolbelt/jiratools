@@ -305,15 +305,18 @@ def _cli_search():
     for issue in results:
         print("{}: {}".format(issue.permalink(), issue.fields.summary))
 
+def _find_jira_helper(jira_id):
+    client = get_client()
+    try:
+        dev_jira = client.issue(jira_id)
+    except jira.exceptions.JIRAError:
+        print("JIRA {} was not found!".format(jira_id))
+        exit(1)
 
 def _create_test_jira_from():
     args = _test_story_args()
     client = get_client()
-    try:
-        dev_jira = client.issue(args.jira_id)
-    except jira.exceptions.JIRAError:
-        print("JIRA {} was not found!".format(args.jira_id))
-        exit(1)
+    _find_jira_helper(args.jira_id)
     issue_data = {
         "project": args.project,
         "summary": args.summary.format(
@@ -323,7 +326,7 @@ def _create_test_jira_from():
         "issuetype": {"name": args.issue_type},
     }
     if args.assign:
-        issue_data.update(assignee={"name": args.user or client.current_user()})
+        issue_data.update(assignee={"name": user or client.current_user()})
     if args.labels:
         issue_data.update(labels=args.labels)
     if args.components:
@@ -340,6 +343,21 @@ def _create_test_jira_from():
         client.add_watcher(test_jira.key, to_watch)
     print("Test JIRA Created: {}".format(test_jira.permalink()))
 
+def _change_jira_assignee():
+    parser = ArgumentParser(
+        formatter_class=RawDescriptionHelpFormatter,
+        description=_cli_add_comment.__doc__,
+    )
+    parser.add_argument("jira_id")
+    parser.add_argument("user", help="New assignee for the JIRA.")
+    args = parser.parse_args()
+	client = get_client()
+	_find_jira_helper(args.jira_id)
+	try:
+	    client.assign_issue(args.jira_id, args.user)
+	except jira.exceptions.JIRAError as e:
+        print('ERROR: "{}" trying to assign a new user to the JIRA.'.format(e.text))
+	
 
 def _example_config_install():
     error_if(
