@@ -6,7 +6,7 @@ PASSWORD=YOUR_PASSWORD
 DEFAULT_ASSIGNEE=%(USERNAME)s
 TEST_PROJECT=YOUR_JIRA_PROJECT
 DEFAULT_ISSUE_TYPE=Story
-DEFAULT_DESCRIPTION=Linking a new story to {dev_jira_id} using jiratools cli.
+DEFAULT_DESCRIPTION=Do necessary work related to linked JIRA.
 # Summary can expect two values passed in to .format() - 1) dev_jira_id, 2) dev_jira_summary
 DEFAULT_SUMMARY=New Linked Story for: {dev_jira_id} - {dev_jira_summary}
 # OPTIONAL VALUES: leave the below blank (or don't include at all) to not set by default
