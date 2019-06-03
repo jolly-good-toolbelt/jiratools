@@ -313,6 +313,15 @@ def _find_jira_helper(jira_id):
         print("JIRA {} was not found!".format(jira_id))
         exit(1)
 
+def _check_for_valid_user(user):
+    client = get_client()
+    try:
+        user = client.user(user)
+    except jira.exceptions.JIRAError as e:
+        print("There was a problem finding user {}. Error message: {}.".format(user, e))
+        exit(1)
+
+
 def _create_test_jira_from():
     args = _test_story_args()
     client = get_client()
@@ -351,11 +360,12 @@ def _change_jira_assignee():
     parser.add_argument("jira_id")
     parser.add_argument("user", help="New assignee for the JIRA.")
     args = parser.parse_args()
-	client = get_client()
-	_find_jira_helper(args.jira_id)
-	try:
-	    client.assign_issue(args.jira_id, args.user)
-	except jira.exceptions.JIRAError as e:
+    client = get_client()
+    _find_jira_helper(args.jira_id)
+    _check_for_valid_user(args.user)
+    try:
+        client.assign_issue(args.jira_id, args.user)
+    except jira.exceptions.JIRAError as e:
         print('ERROR: "{}" trying to assign a new user to the JIRA.'.format(e.text))
 	
 
