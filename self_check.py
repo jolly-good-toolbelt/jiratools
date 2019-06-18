@@ -19,10 +19,7 @@ from show_env import execute_command_list
 SETUP_COMMAND = ["python", "./env_setup.py"]
 
 # Fill in with your own project details!!!
-commands_to_run = [
-    ["poetry", "run", "pre-commit", "run", "-a"],
-    ["poetry", "run", "pytest", "."],
-]
+commands_to_run = [["poetry", "run", "pre-commit", "run", "-a"]]
 
 __doc__ = __doc__.format("\n".join(map(" ".join, commands_to_run)))
 

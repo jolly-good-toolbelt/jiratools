@@ -1,3 +1,4 @@
+"""Error logging for jiratools."""
 from jiratools import add_comment, format_as_code_block
 from jiratools.formatting import format_autoupdate_jira_msg, format_as_jira_table
 
@@ -14,6 +15,7 @@ def add_jira_error_comment(jira_id, error_msg, **format_kwargs):
 
     Returns:
         str: the Issue ID of the JIRA which received the comment
+
     """
     add_comment(
         jira_id,
@@ -41,6 +43,7 @@ def add_jira_comment_with_table(
 
     Returns:
         str: the Issue ID of the JIRA which received the comment
+
     """
     message_with_table = "{}{}".format(
         msg_prefix, format_as_jira_table(data_headers, data_array)
@@ -69,6 +72,7 @@ def update_jira_for_errors(jiras, *errors, **format_kwargs):
 
     Returns:
         list(str): A list of JIRA Issue IDs that were updated.
+
     """
     jiras_commented = []
     for jira in jiras:
