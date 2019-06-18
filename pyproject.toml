@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jiratools"
-version = "1.3.2"
+version = "2.0.0"
 description = "Simple helpers to interface to JIRA from an API or command line."
 authors = ["Brad Brown <brad@bradsbrown.com>"]
 license = "MIT"
