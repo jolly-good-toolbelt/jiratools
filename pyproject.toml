@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "jiratools"
+version = "1.3.2"
+description = "Simple helpers to interface to JIRA from an API or command line."
+authors = ["Brad Brown <brad@bradsbrown.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+jira = "^2.0"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+jira-make-linked-issue = "jiratools:_create_test_jira_from"
+jira-add-comment = "jiratools:_cli_add_comment"
+jira-example-config = "jiratools:_example_config_install"
+jira-search-issues = "jiratools:_cli_search"
+jira-link-issues = "jiratools:cli_jira_link"
+jira-update-assignee = "jiratools:_change_jira_assignee"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
