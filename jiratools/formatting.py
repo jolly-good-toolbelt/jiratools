@@ -1,3 +1,4 @@
+"""Formatting helpers for jiratools."""
 import getpass
 import os
 
@@ -10,7 +11,6 @@ def format_autoupdate_jira_msg(message_body, header_body=None):
     """
     Format a JIRA message with useful headers.
 
-
     An "Automated JIRA Update" title will be added,
     as well as either a URL link if a ``BUILD_URL`` env variable is present,
     or a note indicating a manual run with user id otherwise.
@@ -21,6 +21,7 @@ def format_autoupdate_jira_msg(message_body, header_body=None):
 
     Returns:
         str: a formatted message with headers
+
     """
     message = "h2. {}".format(header_body) if header_body else ""
     message += "\n\nAutomated JIRA Update:\n\n{}\n\n{}".format(
@@ -42,6 +43,7 @@ def format_as_jira_table(headers, data_array):
 
     Returns:
         str: a formatted JIRA table
+
     """
     headers = ["||{}||".format("||".join(headers))]
     return "\n".join(
