@@ -24,7 +24,7 @@ SAMPLE_CONFIG_FILENAME = os.path.join(
 CONFIG = None
 
 
-def exit(status=0, message=None):
+def _exit(status=0, message=None):
     """
     Exit the program and optionally print a message to standard error.
 
@@ -54,7 +54,7 @@ def error_if(check, status=None, message=""):
         message (string): Message to print to standard error if check is True (optional)
     """
     if check:
-        exit(status=status or check, message=message.format(check))
+        _exit(status=status or check, message=message.format(check))
 
 
 def _load_config():
@@ -87,7 +87,7 @@ def _load_config():
 
 def get_client():
     """
-    Returns a configured JIRA client.
+    Return a configured JIRA client.
 
     Configured per the user's home directory ``jira.config`` file.
 
@@ -109,6 +109,7 @@ def format_as_code_block(text_to_wrap):
 
     Returns:
         str: A JIRA formatted code block.
+
     """
     return "".join(["{code:java}", "{}".format(text_to_wrap), "{code}"])
 
@@ -123,6 +124,7 @@ def add_comment(jira_id, comment_text):
 
     Returns:
         A jira comment.
+
     """
     return get_client().add_comment(jira_id, comment_text)
 
@@ -132,10 +134,7 @@ def _link_jiras(client, from_jira, to_jira, relation_type=DEFAULT_LINK_TYPE):
 
 
 def cli_jira_link():
-    """
-    Link two JIRAs as related.
-
-    """
+    """Link two JIRAs as related."""
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument("from_jira", help="The JIRA from which to create the link.")
     parser.add_argument("to_jira", help="The JIRA to which to create the link.")
@@ -273,9 +272,7 @@ def _cli_add_comment():
 
 
 def _cli_search():
-    """
-    Search using JQL and return matches.
-    """
+    """Search using JQL and return matches."""
     client = get_client()
     default_max_count = int(CONFIG.get("MAX_RESULT_COUNT", 0)) or 10
     default_max_count = False if default_max_count == -1 else default_max_count
@@ -305,13 +302,16 @@ def _cli_search():
     for issue in results:
         print("{}: {}".format(issue.permalink(), issue.fields.summary))
 
+
 def _find_jira_helper(jira_id):
     client = get_client()
     try:
         dev_jira = client.issue(jira_id)
     except jira.exceptions.JIRAError:
         print("JIRA {} was not found!".format(jira_id))
-        exit(1)
+        _exit(1)
+    return dev_jira
+
 
 def _check_for_valid_user(user):
     client = get_client()
@@ -319,13 +319,13 @@ def _check_for_valid_user(user):
         user = client.user(user)
     except jira.exceptions.JIRAError as e:
         print("There was a problem finding user {}. Error message: {}.".format(user, e))
-        exit(1)
+        _exit(1)
 
 
 def _create_test_jira_from():
     args = _test_story_args()
     client = get_client()
-    _find_jira_helper(args.jira_id)
+    dev_jira = _find_jira_helper(args.jira_id)
     issue_data = {
         "project": args.project,
         "summary": args.summary.format(
@@ -335,7 +335,7 @@ def _create_test_jira_from():
         "issuetype": {"name": args.issue_type},
     }
     if args.assign:
-        issue_data.update(assignee={"name": user or client.current_user()})
+        issue_data.update(assignee={"name": args.user or client.current_user()})
     if args.labels:
         issue_data.update(labels=args.labels)
     if args.components:
@@ -352,6 +352,7 @@ def _create_test_jira_from():
         client.add_watcher(test_jira.key, to_watch)
     print("Test JIRA Created: {}".format(test_jira.permalink()))
 
+
 def _change_jira_assignee():
     parser = ArgumentParser(
         formatter_class=RawDescriptionHelpFormatter,
@@ -367,7 +368,7 @@ def _change_jira_assignee():
         client.assign_issue(args.jira_id, args.user)
     except jira.exceptions.JIRAError as e:
         print('ERROR: "{}" trying to assign a new user to the JIRA.'.format(e.text))
-	
+
 
 def _example_config_install():
     error_if(
@@ -397,5 +398,5 @@ def _example_config_install():
         error_if(os.path.exists(CONFIG_FILENAME), message=message)
         shutil.copy(SAMPLE_CONFIG_FILENAME, CONFIG_FILENAME)
     else:
-        with open(SAMPLE_CONFIG_FILENAME) as input:
-            shutil.copyfileobj(input, sys.stdout)
+        with open(SAMPLE_CONFIG_FILENAME) as in_file:
+            shutil.copyfileobj(in_file, sys.stdout)
