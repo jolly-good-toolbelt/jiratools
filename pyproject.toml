@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "jiratools"
-version = "2.0.0"
+version = "2.0.1"
 description = "Simple helpers to interface to JIRA from an API or command line."
 authors = ["Brad Brown <brad@bradsbrown.com>"]
 license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/jolly-good-toolbelt/jiratools/"
+repository = "https://github.com/jolly-good-toolbelt/jiratools/"
 
 [tool.poetry.dependencies]
 python = "^3.6"
