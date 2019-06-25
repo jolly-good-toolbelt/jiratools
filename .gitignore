@@ -3,5 +3,9 @@ build
 dist
 *.egg-info
 
+# Docs
+_docs/
+docs/
+
 # VirtualEnv
 VENV
