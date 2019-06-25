@@ -60,11 +60,11 @@ def update_jira_for_errors(jiras, *errors, **format_kwargs):
 
     Args:
         jiras (list, obj): an iterable of objects
-            that each contain two required attributes::
+            that each contain two required attributes
 
             - jira_id (str): the Issue Id of the JIRA to be updated
             - error_message (str): an error message substring which, if found,
-                will trigger and update of the JIRA with the actual error message.
+              will trigger and update of the JIRA with the actual error message.
 
         *errors (str): an error message to be checked against the ``jiras`` for a match
         **format_kwargs: formatting keyword args
