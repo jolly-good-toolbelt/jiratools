@@ -173,7 +173,7 @@ def cli_jira_link() -> None:
         print('ERROR: "{}" trying to make the link.'.format(e.text))
 
 
-def _list_from_config(key_name: str) -> list:
+def _list_from_config(key_name: str) -> List[str]:
     _load_config()
     if not CONFIG:
         raise ConfigNotFoundException

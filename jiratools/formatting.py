@@ -3,7 +3,8 @@ import getpass
 import os
 from typing import Optional, List, Union
 
-DataArray = List[List[Union[str, int]]]
+TableRowData = List[Union[str, int]]
+DataArray = List[TableRowData]
 
 
 def _build_source() -> str:
