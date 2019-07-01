@@ -60,10 +60,6 @@ html_theme_options = {
     "collapse_navigation": False,
 }
 
-from recommonmark.parser import CommonMarkParser  # noqa
-
-source_parsers = {".md": CommonMarkParser}
-source_suffix = [".rst", ".md"]
 
 # The master toctree document.
 master_doc = "index"
