@@ -1,13 +1,19 @@
 """Formatting helpers for jiratools."""
 import getpass
 import os
+from typing import Optional, List, Union
+
+TableRowData = List[Union[str, int]]
+DataArray = List[TableRowData]
 
 
-def _build_source():
+def _build_source() -> str:
     return os.environ.get("BUILD_URL", "Manual run by {}".format(getpass.getuser()))
 
 
-def format_autoupdate_jira_msg(message_body, header_body=None):
+def format_autoupdate_jira_msg(
+    message_body: str, header_body: Optional[str] = None
+) -> str:
     """
     Format a JIRA message with useful headers.
 
@@ -16,11 +22,11 @@ def format_autoupdate_jira_msg(message_body, header_body=None):
     or a note indicating a manual run with user id otherwise.
 
     Args:
-        message_body (str): the body of the message
-        header_body (str, optional): a header to be added with ``h2`` tag
+        message_body: the body of the message
+        header_body: a header to be added with ``h2`` tag
 
     Returns:
-        str: a formatted message with headers
+        a formatted message with headers
 
     """
     message = "h2. {}".format(header_body) if header_body else ""
@@ -30,19 +36,18 @@ def format_autoupdate_jira_msg(message_body, header_body=None):
     return message
 
 
-def format_as_jira_table(headers, data_array):
+def format_as_jira_table(headers: List[str], data_array: DataArray) -> str:
     """
     Build a JIRA table given headers and row data.
 
     Args:
-        headers (list of str): a list of header column names
-        data_array (list of list of str,int): An array of lists of strings,
-            representing table rows. e.g.::
+        headers: a list of header column names
+        data_array: An array of lists, representing table rows. e.g.::
 
             [["a", "b", "c"], ["d", "e", "f"]]
 
     Returns:
-        str: a formatted JIRA table
+        a formatted JIRA table
 
     """
     headers = ["||{}||".format("||".join(headers))]
