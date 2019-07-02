@@ -5,13 +5,16 @@ from argparse import (
     ArgumentParser,
     ArgumentDefaultsHelpFormatter,
     RawDescriptionHelpFormatter,
+    Namespace,
 )
 from configparser import ConfigParser
 import os
 import shutil
 import sys
+from typing import Any, Optional, List
 
 import jira
+import requests
 
 
 REQUIRED_KEYS = ("JIRA_URL", "USERNAME", "PASSWORD", "DEFAULT_ASSIGNEE", "TEST_PROJECT")
@@ -24,20 +27,26 @@ SAMPLE_CONFIG_FILENAME = os.path.join(
 CONFIG = None
 
 
-def _exit(status=0, message=None):
+class ConfigNotFoundException(Exception):
+    """Exception for config failure."""
+
+    pass
+
+
+def _exit(status: int = 0, message: Optional[str] = None) -> None:
     """
     Exit the program and optionally print a message to standard error.
 
     Args:
-        status (int): Exit code to use for exit (optional)
-        message (string): Message to print to standard error (optional)
+        status: Exit code to use for exit (optional)
+        message: Message to print to standard error (optional)
     """
     if message:
         print(message, file=sys.stderr)
     sys.exit(status)
 
 
-def error_if(check, status=None, message=""):
+def error_if(check: Any, status: Optional[int] = None, message: str = "") -> None:
     """
     Exit the program if a provided check is true.
 
@@ -50,14 +59,14 @@ def error_if(check, status=None, message=""):
     Args:
         check: Anything with truthiness that can determine
             if the program should exit or not
-        status (int): Exit code to use for exit (optional)
-        message (string): Message to print to standard error if check is True (optional)
+        status: Exit code to use for exit
+        message: Message to print to standard error if check is True
     """
     if check:
         _exit(status=status or check, message=message.format(check))
 
 
-def _load_config():
+def _load_config() -> None:
     """
     Load CONFIG_FILENAME into CONFIG.
 
@@ -85,7 +94,7 @@ def _load_config():
     CONFIG = config[section_name]
 
 
-def get_client():
+def get_client() -> jira.JIRA:
     """
     Return a configured JIRA client.
 
@@ -93,6 +102,8 @@ def get_client():
 
     """
     _load_config()
+    if not CONFIG:
+        raise ConfigNotFoundException
     client = jira.JIRA(
         CONFIG["JIRA_URL"],
         basic_auth=(CONFIG["USERNAME"], CONFIG.get("PASSWORD", raw=True)),
@@ -100,27 +111,27 @@ def get_client():
     return client
 
 
-def format_as_code_block(text_to_wrap):
+def format_as_code_block(text_to_wrap: str) -> str:
     """
     Wrap the text in a JIRA code block.
 
     Args:
-        text_to_wrap (str): The text to wrap.
+        text_to_wrap: The text to wrap.
 
     Returns:
-        str: A JIRA formatted code block.
+        A JIRA formatted code block.
 
     """
     return "".join(["{code:java}", "{}".format(text_to_wrap), "{code}"])
 
 
-def add_comment(jira_id, comment_text):
+def add_comment(jira_id: str, comment_text: str) -> jira.resources.Comment:
     """
     Add a comment to the JIRA ID.
 
     Args:
-        jira_id (str): The JIRA ID to comment on.
-        comment_text (str): The text to add as the comment body.
+        jira_id: The JIRA ID to comment on.
+        comment_text: The text to add as the comment body.
 
     Returns:
         A jira comment.
@@ -129,11 +140,16 @@ def add_comment(jira_id, comment_text):
     return get_client().add_comment(jira_id, comment_text)
 
 
-def _link_jiras(client, from_jira, to_jira, relation_type=DEFAULT_LINK_TYPE):
+def _link_jiras(
+    client: jira.JIRA,
+    from_jira: str,
+    to_jira: str,
+    relation_type: str = DEFAULT_LINK_TYPE,
+) -> requests.Response:
     return client.create_issue_link(relation_type, from_jira, to_jira)
 
 
-def cli_jira_link():
+def cli_jira_link() -> None:
     """Link two JIRAs as related."""
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument("from_jira", help="The JIRA from which to create the link.")
@@ -157,20 +173,26 @@ def cli_jira_link():
         print('ERROR: "{}" trying to make the link.'.format(e.text))
 
 
-def _list_from_config(key_name):
+def _list_from_config(key_name: str) -> List[str]:
     _load_config()
+    if not CONFIG:
+        raise ConfigNotFoundException
     return list(filter(None, [x.strip() for x in CONFIG.get(key_name, "").split(",")]))
 
 
-def _component_id_from_name(project_components, component_name):
+def _component_id_from_name(
+    project_components: List[jira.resources.Component], component_name: str
+) -> str:
     matches = [x.id for x in project_components if x.name == component_name]
     message = "More than one component in project with name: {}"
     error_if(len(matches) != 1, message=message.format(component_name))
     return matches[0]
 
 
-def _test_story_args():
+def _test_story_args() -> Namespace:
     _load_config()
+    if not CONFIG:
+        raise ConfigNotFoundException
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument("jira_id")
     assign_default = bool(CONFIG["DEFAULT_ASSIGNEE"])
@@ -246,7 +268,7 @@ def _test_story_args():
     return args
 
 
-def _cli_add_comment():
+def _cli_add_comment() -> None:
     """
     Quick "add a short comment to a JIRA" command line tool.
 
@@ -271,10 +293,12 @@ def _cli_add_comment():
         print('ERROR: "{}" for "{}"!'.format(e.text, args.jira_id))
 
 
-def _cli_search():
+def _cli_search() -> None:
     """Search using JQL and return matches."""
     client = get_client()
-    default_max_count = int(CONFIG.get("MAX_RESULT_COUNT", 0)) or 10
+    if not CONFIG:
+        raise ConfigNotFoundException
+    default_max_count = int(CONFIG.get("MAX_RESULT_COUNT", "0")) or 10
     default_max_count = False if default_max_count == -1 else default_max_count
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     result_count = parser.add_mutually_exclusive_group()
@@ -303,7 +327,7 @@ def _cli_search():
         print("{}: {}".format(issue.permalink(), issue.fields.summary))
 
 
-def _find_jira_helper(jira_id):
+def _find_jira_helper(jira_id: str) -> jira.resources.Issue:
     client = get_client()
     try:
         dev_jira = client.issue(jira_id)
@@ -313,7 +337,7 @@ def _find_jira_helper(jira_id):
     return dev_jira
 
 
-def _check_for_valid_user(user):
+def _check_for_valid_user(user: str) -> None:
     client = get_client()
     try:
         user = client.user(user)
@@ -322,7 +346,7 @@ def _check_for_valid_user(user):
         _exit(1)
 
 
-def _create_test_jira_from():
+def _create_test_jira_from() -> None:
     args = _test_story_args()
     client = get_client()
     dev_jira = _find_jira_helper(args.jira_id)
@@ -353,7 +377,7 @@ def _create_test_jira_from():
     print("Test JIRA Created: {}".format(test_jira.permalink()))
 
 
-def _change_jira_assignee():
+def _change_jira_assignee() -> None:
     parser = ArgumentParser(
         formatter_class=RawDescriptionHelpFormatter,
         description=_cli_add_comment.__doc__,
@@ -370,7 +394,7 @@ def _change_jira_assignee():
         print('ERROR: "{}" trying to assign a new user to the JIRA.'.format(e.text))
 
 
-def _example_config_install():
+def _example_config_install() -> None:
     error_if(
         not os.path.exists(SAMPLE_CONFIG_FILENAME),
         message="Missing example config file: {}".format(SAMPLE_CONFIG_FILENAME),

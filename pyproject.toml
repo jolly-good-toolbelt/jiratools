@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "jiratools"
-version = "2.0.1"
+version = "2.0.2"
 description = "Simple helpers to interface to JIRA from an API or command line."
 authors = ["Brad Brown <brad@bradsbrown.com>"]
 license = "MIT"
 readme = "README.rst"
 homepage = "https://github.com/jolly-good-toolbelt/jiratools/"
+documentation = "https://jolly-good-toolbelt.github.io/jiratools/"
 repository = "https://github.com/jolly-good-toolbelt/jiratools/"
 
 [tool.poetry.dependencies]
@@ -14,6 +15,11 @@ jira = "^2.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^1.17"
+sphinx = "^2.0"
+sphinx-rtd-theme = "^0.4.3"
+ghp-import = "^0.5.5"
+tomlkit = "^0.5.3"
+sphinx-autodoc-typehints = "^1.6"
 
 [tool.poetry.scripts]
 jira-make-linked-issue = "jiratools:_create_test_jira_from"
