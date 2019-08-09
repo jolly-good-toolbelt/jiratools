@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jiratools"
-version = "2.0.2"
+version = "2.1.0"
 description = "Simple helpers to interface to JIRA from an API or command line."
 authors = ["Brad Brown <brad@bradsbrown.com>"]
 license = "MIT"
@@ -12,6 +12,7 @@ repository = "https://github.com/jolly-good-toolbelt/jiratools/"
 [tool.poetry.dependencies]
 python = "^3.6"
 jira = "^2.0"
+jgt_common = "^1.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^1.17"
@@ -22,12 +23,13 @@ tomlkit = "^0.5.3"
 sphinx-autodoc-typehints = "^1.6"
 
 [tool.poetry.scripts]
-jira-make-linked-issue = "jiratools:_create_test_jira_from"
-jira-add-comment = "jiratools:_cli_add_comment"
-jira-example-config = "jiratools:_example_config_install"
-jira-search-issues = "jiratools:_cli_search"
-jira-link-issues = "jiratools:cli_jira_link"
-jira-update-assignee = "jiratools:_change_jira_assignee"
+jira-link-issues = "jiratools:jira_link"
+jira-make-linked-issue = "jiratools:make_linked"
+jira-add-comment = "jiratools:add_comment"
+jira-search-issues = "jiratools:search"
+jira-update-assignee = "jiratools:reassign"
+jira-example-config = "jiratools:example_config_install"
+jiratool = "jiratools:main"
 
 [build-system]
 requires = ["poetry>=0.12"]
