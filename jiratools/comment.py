@@ -4,7 +4,7 @@ import sys
 
 import jira
 
-from .helpers import add_comment as add_comment
+from .helpers import add_comment
 
 
 def cli_add_comment(args: argparse.Namespace) -> jira.resources.Comment:

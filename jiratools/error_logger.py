@@ -1,7 +1,8 @@
 """Error logging for jiratools."""
 from typing import List, Iterable
 
-from jiratools import add_comment, format_as_code_block
+from jiratools import format_as_code_block
+from jiratools.helpers import add_comment
 from jiratools.formatting import (
     DataArray,
     format_autoupdate_jira_msg,
