@@ -12,8 +12,8 @@ from .helpers import list_from_config
 
 from .comment import cli_add_comment
 from .link import cli_jira_link
-from .make_linked import cli_make_linked
-from .search import cli_search
+from .make_and_link import cli_make_linked
+from .do_search import cli_search
 from .assignee import cli_reassign
 from .example_config import cli_example_config
 
