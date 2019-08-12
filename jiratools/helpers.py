@@ -5,7 +5,7 @@ import jira
 from jgt_common import exit, error_if
 import requests
 
-from .utils import ConfigNotFoundException, CONFIG, DEFAULT_LINK_TYPE
+from .utils import DEFAULT_LINK_TYPE
 from .utils import get_client, load_config
 
 
@@ -40,10 +40,8 @@ def list_from_config(key_name: str) -> List[str]:
         a list of string values
 
     """
-    load_config()
-    if not CONFIG:
-        raise ConfigNotFoundException
-    return list(filter(None, [x.strip() for x in CONFIG.get(key_name, "").split(",")]))
+    config = load_config()
+    return list(filter(None, [x.strip() for x in config.get(key_name, "").split(",")]))
 
 
 def component_id_from_name(

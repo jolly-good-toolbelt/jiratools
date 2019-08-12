@@ -7,7 +7,7 @@ from argparse import (
     RawDescriptionHelpFormatter,
 )
 
-from .utils import ConfigNotFoundException, CONFIG, load_config, DEFAULT_LINK_TYPE
+from .utils import load_config, DEFAULT_LINK_TYPE
 from .helpers import list_from_config
 
 from .comment import cli_add_comment
@@ -54,11 +54,9 @@ def jira_link() -> None:
 
 
 def _setup_make_linked_parser(parser: ArgumentParser) -> ArgumentParser:
-    load_config()
-    if not CONFIG:
-        raise ConfigNotFoundException
+    config = load_config()
     parser.add_argument("jira_id")
-    assign_default = bool(CONFIG["DEFAULT_ASSIGNEE"])
+    assign_default = bool(config["DEFAULT_ASSIGNEE"])
     assignment = parser.add_mutually_exclusive_group()
     assignment.add_argument(
         "--assign",
@@ -77,13 +75,13 @@ def _setup_make_linked_parser(parser: ArgumentParser) -> ArgumentParser:
     parser.add_argument(
         "-p",
         "--project",
-        default=CONFIG["TEST_PROJECT"],
+        default=config["TEST_PROJECT"],
         help="JIRA project in which to create test story",
     )
     parser.add_argument(
         "-u",
         "--user",
-        default=CONFIG["DEFAULT_ASSIGNEE"],
+        default=config["DEFAULT_ASSIGNEE"],
         help="the user who will receive the assignment",
     )
     parser.add_argument(
@@ -96,7 +94,7 @@ def _setup_make_linked_parser(parser: ArgumentParser) -> ArgumentParser:
     parser.add_argument(
         "-d",
         "--description",
-        default=CONFIG["DEFAULT_DESCRIPTION"],
+        default=config["DEFAULT_DESCRIPTION"],
         help="Description string for Test JIRA.",
     )
     parser.add_argument(
@@ -109,14 +107,14 @@ def _setup_make_linked_parser(parser: ArgumentParser) -> ArgumentParser:
     parser.add_argument(
         "-s",
         "--summary",
-        default=CONFIG["DEFAULT_SUMMARY"],
+        default=config["DEFAULT_SUMMARY"],
         help="Summary string for Test JIRA - will receive the Dev JIRA key and "
         "summary as string format values",
     )
     parser.add_argument(
         "-t",
         "--issue-type",
-        default=CONFIG["DEFAULT_ISSUE_TYPE"],
+        default=config["DEFAULT_ISSUE_TYPE"],
         help="Issue type for Test JIRA -- "
         "must be a valid type name on target project",
     )
@@ -159,9 +157,8 @@ def add_comment() -> None:
 
 
 def _setup_search_parser(parser):
-    if not CONFIG:
-        raise ConfigNotFoundException
-    default_max_count = int(CONFIG.get("MAX_RESULT_COUNT", "0")) or 10
+    config = load_config()
+    default_max_count = int(config.get("MAX_RESULT_COUNT", "0")) or 10
     default_max_count = False if default_max_count == -1 else default_max_count
     result_count = parser.add_mutually_exclusive_group()
     result_count.add_argument(

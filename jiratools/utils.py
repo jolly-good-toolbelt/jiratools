@@ -1,5 +1,5 @@
 """Basic utility functions for JIRA tools."""
-from configparser import ConfigParser
+from configparser import ConfigParser, SectionProxy
 import os
 from pathlib import Path
 
@@ -40,7 +40,7 @@ def get_client() -> jira.JIRA:
     return client
 
 
-def load_config() -> None:
+def load_config() -> SectionProxy:
     """
     Load CONFIG_FILENAME into CONFIG.
 
@@ -49,7 +49,7 @@ def load_config() -> None:
     """
     global CONFIG
     if CONFIG is not None:
-        return
+        return CONFIG
 
     config = ConfigParser()
     message = 'Config file "{}" {{}}'.format(CONFIG_FILENAME)
@@ -66,6 +66,4 @@ def load_config() -> None:
     )
     error_if(missing_keys, status=1, message=missing_message)
     CONFIG = config[section_name]
-
-
-load_config()
+    return CONFIG
