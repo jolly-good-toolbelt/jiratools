@@ -65,24 +65,25 @@ def component_id_from_name(
 
 
 def link_jiras(
-    client: jira.JIRA,
     from_jira: str,
     to_jira: str,
     relation_type: str = DEFAULT_LINK_TYPE,
+    client: jira.JIRA = None,
 ) -> requests.Response:
     """
     Create a link between two JIRA issues.
 
     Args:
-        client: the instantiated JIRA client
         from_jira: a JIRA issue id
         to_jira: a JIRA issue id
         relation_type: the type of link relationship
+        client: the instantiated JIRA client
 
     Returns:
         the client Response
 
     """
+    client = client or get_client()
     return client.create_issue_link(relation_type, from_jira, to_jira)
 
 

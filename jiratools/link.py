@@ -15,7 +15,6 @@ def cli_jira_link(args: argparse.Namespace) -> None:
         )
     )
     try:
-        client = get_client()
-        link_jiras(client, args.from_jira, args.to_jira, args.link_type)
+        link_jiras(args.from_jira, args.to_jira, args.link_type)
     except jira.exceptions.JIRAError as e:
         print('ERROR: "{}" trying to make the link.'.format(e.text))

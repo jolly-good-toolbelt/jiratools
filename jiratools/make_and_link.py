@@ -30,7 +30,7 @@ def cli_make_linked(args: argparse.Namespace) -> None:
             ]
         )
     test_jira = client.create_issue(**issue_data)
-    link_jiras(client, test_jira.key, dev_jira.key)
+    link_jiras(test_jira.key, dev_jira.key, client=client)
     for to_watch in args.watchers:
         client.add_watcher(test_jira.key, to_watch)
     print("Test JIRA Created: {}".format(test_jira.permalink()))
