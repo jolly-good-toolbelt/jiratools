@@ -9,7 +9,7 @@ from .utils import DEFAULT_LINK_TYPE
 from .utils import get_client, load_config
 
 
-def find_jira_helper(jira_id: str) -> jira.resources.Issue:
+def get_issue_by_id(jira_id: str) -> jira.resources.Issue:
     """
     Find the JIRA of a given id, or exit if not found.
 

@@ -2,13 +2,13 @@
 import argparse
 
 from .utils import get_client
-from .helpers import find_jira_helper, component_id_from_name, link_jiras
+from .helpers import get_issue_by_id, component_id_from_name, link_jiras
 
 
 def cli_make_linked(args: argparse.Namespace) -> None:
     """Build a new story linked to the given one."""
     client = get_client()
-    dev_jira = find_jira_helper(args.jira_id)
+    dev_jira = get_issue_by_id(args.jira_id)
     issue_data = {
         "project": args.project,
         "summary": args.summary.format(
