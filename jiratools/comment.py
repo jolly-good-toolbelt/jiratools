@@ -11,6 +11,7 @@ def cli_add_comment(args: argparse.Namespace) -> jira.resources.Comment:
     """Add comment to issue."""
     if args.message == "-":
         args.message = sys.stdin.read()
+        # Add a blank line for spacing.
         print()
 
     print('Adding comment "{}" to "{}"'.format(args.message, args.jira_id))
