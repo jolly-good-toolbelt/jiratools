@@ -64,6 +64,6 @@ def load_config() -> SectionProxy:
     missing_message = message.format(
         'section "{}" missing keys: {{}}'.format(section_name)
     )
-    error_if(missing_keys, status=1, message=missing_message)
+    error_if(missing_keys, message=missing_message)
     CONFIG = config[section_name]
     return CONFIG
