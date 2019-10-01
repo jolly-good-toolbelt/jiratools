@@ -3,7 +3,6 @@ import argparse
 
 import jira
 
-from .utils import get_client
 from .helpers import link_jiras
 
 
