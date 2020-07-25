@@ -177,7 +177,7 @@ def _list_from_config(key_name: str) -> List[str]:
     _load_config()
     if not CONFIG:
         raise ConfigNotFoundException
-    return list(filter(None, [x.strip() for x in CONFIG.get(key_name, "").split(",")]))
+    return list(filter(None, (x.strip() for x in CONFIG.get(key_name, "").split(","))))
 
 
 def _component_id_from_name(
