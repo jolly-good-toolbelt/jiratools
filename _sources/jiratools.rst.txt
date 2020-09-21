@@ -1,0 +1,26 @@
+jiratools package
+=================
+
+.. automodule:: jiratools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+jiratools.error\_logger module
+------------------------------
+
+.. automodule:: jiratools.error_logger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+jiratools.formatting module
+---------------------------
+
+.. automodule:: jiratools.formatting
+   :members:
+   :undoc-members:
+   :show-inheritance:

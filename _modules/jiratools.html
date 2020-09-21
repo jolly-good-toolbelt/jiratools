@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jiratools &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../jiratools.html">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jiratools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jiratools.html#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jiratools.html#module-jiratools.formatting">jiratools.formatting module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>jiratools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jiratools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Some simple API functions and command-line tools for interaction with JIRA.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ArgumentParser</span><span class="p">,</span>
+    <span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">,</span>
+    <span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+    <span class="n">Namespace</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">jira</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+<span class="n">REQUIRED_KEYS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;JIRA_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;USERNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;PASSWORD&quot;</span><span class="p">,</span> <span class="s2">&quot;DEFAULT_ASSIGNEE&quot;</span><span class="p">,</span> <span class="s2">&quot;TEST_PROJECT&quot;</span><span class="p">)</span>
+<span class="n">DEFAULT_LINK_TYPE</span> <span class="o">=</span> <span class="s2">&quot;relates to&quot;</span>
+
+<span class="n">CONFIG_FILENAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">),</span> <span class="s2">&quot;jira.config&quot;</span><span class="p">)</span>
+<span class="n">SAMPLE_CONFIG_FILENAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;jira.config.example&quot;</span>
+<span class="p">)</span>
+<span class="n">CONFIG</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="ConfigNotFoundException"><a class="viewcode-back" href="../jiratools.html#jiratools.ConfigNotFoundException">[docs]</a><span class="k">class</span> <span class="nc">ConfigNotFoundException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exception for config failure.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+<span class="k">def</span> <span class="nf">_exit</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exit the program and optionally print a message to standard error.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        status: Exit code to use for exit (optional)</span>
+<span class="sd">        message: Message to print to standard error (optional)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="error_if"><a class="viewcode-back" href="../jiratools.html#jiratools.error_if">[docs]</a><span class="k">def</span> <span class="nf">error_if</span><span class="p">(</span><span class="n">check</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exit the program if a provided check is true.</span>
+
+<span class="sd">    Exit the program if the check is true.</span>
+<span class="sd">    If a status is provided,</span>
+<span class="sd">    that code is used for the exit code;</span>
+<span class="sd">    otherwise the value from the check is used.</span>
+<span class="sd">    An optional message for standard error can also be provided.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        check: Anything with truthiness that can determine</span>
+<span class="sd">            if the program should exit or not</span>
+<span class="sd">        status: Exit code to use for exit</span>
+<span class="sd">        message: Message to print to standard error if check is True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
+        <span class="n">_exit</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">status</span> <span class="ow">or</span> <span class="n">check</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check</span><span class="p">))</span></div>
+
+
+<span class="k">def</span> <span class="nf">_load_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load CONFIG_FILENAME into CONFIG.</span>
+
+<span class="sd">    If not already loaded; call before touching CONFIG</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">CONFIG</span>
+    <span class="k">if</span> <span class="n">CONFIG</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Config file &quot;</span><span class="si">{}</span><span class="s1">&quot; {{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">)</span>
+    <span class="n">error_if</span><span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;not found&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">)</span>
+    <span class="n">section_name</span> <span class="o">=</span> <span class="s2">&quot;jira&quot;</span>
+    <span class="n">error_if</span><span class="p">(</span>
+        <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;missing &quot;</span><span class="si">{}</span><span class="s1">&quot; section&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="n">missing_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="n">section_name</span><span class="p">]]</span>
+    <span class="n">missing_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="s1">&#39;section &quot;</span><span class="si">{}</span><span class="s1">&quot; missing keys: {{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">error_if</span><span class="p">(</span><span class="n">missing_keys</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">missing_message</span><span class="p">)</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="get_client"><a class="viewcode-back" href="../jiratools.html#jiratools.get_client">[docs]</a><span class="k">def</span> <span class="nf">get_client</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">jira</span><span class="o">.</span><span class="n">JIRA</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a configured JIRA client.</span>
+
+<span class="sd">    Configured per the user&#39;s home directory ``jira.config`` file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_load_config</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">CONFIG</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConfigNotFoundException</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">jira</span><span class="o">.</span><span class="n">JIRA</span><span class="p">(</span>
+        <span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;JIRA_URL&quot;</span><span class="p">],</span>
+        <span class="n">basic_auth</span><span class="o">=</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;USERNAME&quot;</span><span class="p">],</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PASSWORD&quot;</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">client</span></div>
+
+
+<div class="viewcode-block" id="format_as_code_block"><a class="viewcode-back" href="../jiratools.html#jiratools.format_as_code_block">[docs]</a><span class="k">def</span> <span class="nf">format_as_code_block</span><span class="p">(</span><span class="n">text_to_wrap</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrap the text in a JIRA code block.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text_to_wrap: The text to wrap.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A JIRA formatted code block.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{code:java}&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_to_wrap</span><span class="p">),</span> <span class="s2">&quot;</span><span class="si">{code}</span><span class="s2">&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="add_comment"><a class="viewcode-back" href="../jiratools.html#jiratools.add_comment">[docs]</a><span class="k">def</span> <span class="nf">add_comment</span><span class="p">(</span><span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">comment_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jira</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">Comment</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a comment to the JIRA ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jira_id: The JIRA ID to comment on.</span>
+<span class="sd">        comment_text: The text to add as the comment body.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A jira comment.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_client</span><span class="p">()</span><span class="o">.</span><span class="n">add_comment</span><span class="p">(</span><span class="n">jira_id</span><span class="p">,</span> <span class="n">comment_text</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_link_jiras</span><span class="p">(</span>
+    <span class="n">client</span><span class="p">:</span> <span class="n">jira</span><span class="o">.</span><span class="n">JIRA</span><span class="p">,</span>
+    <span class="n">from_jira</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">to_jira</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">relation_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LINK_TYPE</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">create_issue_link</span><span class="p">(</span><span class="n">relation_type</span><span class="p">,</span> <span class="n">from_jira</span><span class="p">,</span> <span class="n">to_jira</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="cli_jira_link"><a class="viewcode-back" href="../jiratools.html#jiratools.cli_jira_link">[docs]</a><span class="k">def</span> <span class="nf">cli_jira_link</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Link two JIRAs as related.&quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">formatter_class</span><span class="o">=</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;from_jira&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The JIRA from which to create the link.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;to_jira&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The JIRA to which to create the link.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-t&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--link-type&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The type of link to create.&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">DEFAULT_LINK_TYPE</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s1">&#39;Creating a &quot;</span><span class="si">{}</span><span class="s1">&quot; link from &quot;</span><span class="si">{}</span><span class="s1">&quot; to &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">link_type</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">from_jira</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">to_jira</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+        <span class="n">_link_jiras</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">from_jira</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">to_jira</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">link_type</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR: &quot;</span><span class="si">{}</span><span class="s1">&quot; trying to make the link.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">))</span></div>
+
+
+<span class="k">def</span> <span class="nf">_list_from_config</span><span class="p">(</span><span class="n">key_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="n">_load_config</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">CONFIG</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConfigNotFoundException</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key_name</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))))</span>
+
+
+<span class="k">def</span> <span class="nf">_component_id_from_name</span><span class="p">(</span>
+    <span class="n">project_components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">jira</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">Component</span><span class="p">],</span> <span class="n">component_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">project_components</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">component_name</span><span class="p">]</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;More than one component in project with name: </span><span class="si">{}</span><span class="s2">&quot;</span>
+    <span class="n">error_if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">component_name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_test_story_args</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Namespace</span><span class="p">:</span>
+    <span class="n">_load_config</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">CONFIG</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConfigNotFoundException</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">formatter_class</span><span class="o">=</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;jira_id&quot;</span><span class="p">)</span>
+    <span class="n">assign_default</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;DEFAULT_ASSIGNEE&quot;</span><span class="p">])</span>
+    <span class="n">assignment</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">assignment</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--assign&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;assign&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">assign_default</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Assign story to user, current user if none provided.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">assignment</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--no-assign&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;assign&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="ow">not</span> <span class="n">assign_default</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Leave Test JIRA unassigned&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-p&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--project&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;TEST_PROJECT&quot;</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;JIRA project in which to create test story&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-u&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--user&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;DEFAULT_ASSIGNEE&quot;</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the user who will receive the assignment&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--components&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">_list_from_config</span><span class="p">(</span><span class="s2">&quot;DEFAULT_COMPONENTS&quot;</span><span class="p">),</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Component tag to be aplied to the Test Story&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--description&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;DEFAULT_DESCRIPTION&quot;</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Description string for Test JIRA.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-l&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--labels&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">_list_from_config</span><span class="p">(</span><span class="s2">&quot;DEFAULT_LABELS&quot;</span><span class="p">),</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of labels to be applied to the Test story&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--summary&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;DEFAULT_SUMMARY&quot;</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Summary string for Test JIRA - will receive the Dev JIRA key and &quot;</span>
+        <span class="s2">&quot;summary as string format values&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-t&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--issue-type&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;DEFAULT_ISSUE_TYPE&quot;</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Issue type for Test JIRA -- &quot;</span>
+        <span class="s2">&quot;must be a valid type name on target project&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-w&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--watchers&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">_list_from_config</span><span class="p">(</span><span class="s2">&quot;WATCHERS&quot;</span><span class="p">),</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Watchers to add to Test JIRA&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">args</span>
+
+
+<span class="k">def</span> <span class="nf">_cli_add_comment</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Quick &quot;add a short comment to a JIRA&quot; command line tool.</span>
+
+<span class="sd">    If &#39;message&#39; is &#39;-&#39; then stdin will be read.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">_cli_add_comment</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;jira_id&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comment to add to the given JIRA.&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding comment &quot;</span><span class="si">{}</span><span class="s1">&quot; to &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">jira_id</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">add_comment</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">jira_id</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR: &quot;</span><span class="si">{}</span><span class="s1">&quot; for &quot;</span><span class="si">{}</span><span class="s1">&quot;!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">jira_id</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_cli_search</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Search using JQL and return matches.&quot;&quot;&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">CONFIG</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConfigNotFoundException</span>
+    <span class="n">default_max_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MAX_RESULT_COUNT&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="mi">10</span>
+    <span class="n">default_max_count</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">default_max_count</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">default_max_count</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">formatter_class</span><span class="o">=</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">)</span>
+    <span class="n">result_count</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">result_count</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--max-results&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-m&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">default_max_count</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Max results returned.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">result_count</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--no-max-count&quot;</span><span class="p">,</span> <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;max_results&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--count-only&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search_issues</span><span class="p">(</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">maxResults</span><span class="o">=</span><span class="kc">False</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">count_only</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">max_results</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Search for &quot;</span><span class="si">{}</span><span class="s1">&quot; returned </span><span class="si">{}</span><span class="s1"> results&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">count_only</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">issue</span><span class="o">.</span><span class="n">permalink</span><span class="p">(),</span> <span class="n">issue</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">summary</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_find_jira_helper</span><span class="p">(</span><span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jira</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">Issue</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dev_jira</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">issue</span><span class="p">(</span><span class="n">jira_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;JIRA </span><span class="si">{}</span><span class="s2"> was not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jira_id</span><span class="p">))</span>
+        <span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dev_jira</span>
+
+
+<span class="k">def</span> <span class="nf">_check_for_valid_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There was a problem finding user </span><span class="si">{}</span><span class="s2">. Error message: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        <span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_create_test_jira_from</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">_test_story_args</span><span class="p">()</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="n">dev_jira</span> <span class="o">=</span> <span class="n">_find_jira_helper</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">jira_id</span><span class="p">)</span>
+    <span class="n">issue_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">project</span><span class="p">,</span>
+        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">dev_jira_id</span><span class="o">=</span><span class="n">dev_jira</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">dev_jira_summary</span><span class="o">=</span><span class="n">dev_jira</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">summary</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+        <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">issue_type</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">assign</span><span class="p">:</span>
+        <span class="n">issue_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">assignee</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">user</span> <span class="ow">or</span> <span class="n">client</span><span class="o">.</span><span class="n">current_user</span><span class="p">()})</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">labels</span><span class="p">:</span>
+        <span class="n">issue_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+        <span class="n">project_components</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">project_components</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">issue_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">components</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">_component_id_from_name</span><span class="p">(</span><span class="n">project_components</span><span class="p">,</span> <span class="n">x</span><span class="p">)}</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">components</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="n">test_jira</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_issue</span><span class="p">(</span><span class="o">**</span><span class="n">issue_data</span><span class="p">)</span>
+    <span class="n">_link_jiras</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">test_jira</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">dev_jira</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">to_watch</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">watchers</span><span class="p">:</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">add_watcher</span><span class="p">(</span><span class="n">test_jira</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">to_watch</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test JIRA Created: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_jira</span><span class="o">.</span><span class="n">permalink</span><span class="p">()))</span>
+
+
+<span class="k">def</span> <span class="nf">_change_jira_assignee</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">_cli_add_comment</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;jira_id&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;New assignee for the JIRA.&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="n">_find_jira_helper</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">jira_id</span><span class="p">)</span>
+    <span class="n">_check_for_valid_user</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">assign_issue</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">jira_id</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR: &quot;</span><span class="si">{}</span><span class="s1">&quot; trying to assign a new user to the JIRA.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_example_config_install</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">error_if</span><span class="p">(</span>
+        <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">SAMPLE_CONFIG_FILENAME</span><span class="p">),</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Missing example config file: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SAMPLE_CONFIG_FILENAME</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Install example jira.config in your homne directory &quot;</span>
+        <span class="s2">&quot;unless you have one already. Without any command line &quot;</span>
+        <span class="s2">&quot;switches, do a dry-run and print the example config file &quot;</span>
+        <span class="s2">&quot;contents to stdout.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--install&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Install the example config file unless you have one already&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;Copying&quot;</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">install</span> <span class="k">else</span> <span class="s2">&quot;Would copy&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">SAMPLE_CONFIG_FILENAME</span><span class="p">,</span> <span class="n">CONFIG_FILENAME</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">install</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Not installing, config file already in place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">CONFIG_FILENAME</span>
+        <span class="p">)</span>
+        <span class="n">error_if</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">),</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">SAMPLE_CONFIG_FILENAME</span><span class="p">,</span> <span class="n">CONFIG_FILENAME</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SAMPLE_CONFIG_FILENAME</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Brad Brown
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/85dbe2273352945e0e1290e2ada8fb3ba0d9e011">85dbe2273352945e0e1290e2ada8fb3ba0d9e011</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

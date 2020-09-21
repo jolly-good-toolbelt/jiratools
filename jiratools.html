@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jiratools package &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Maintainer’s Documentation" href="MAINTAINER.html" />
+    <link rel="prev" title="JiraTools" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-jiratools.formatting">jiratools.formatting module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>jiratools package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/jiratools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-jiratools">
+<span id="jiratools-package"></span><h1>jiratools package<a class="headerlink" href="#module-jiratools" title="Permalink to this headline">¶</a></h1>
+<p>Some simple API functions and command-line tools for interaction with JIRA.</p>
+<dl class="py exception">
+<dt id="jiratools.ConfigNotFoundException">
+<em class="property">exception </em><code class="sig-prename descclassname">jiratools.</code><code class="sig-name descname">ConfigNotFoundException</code><a class="reference internal" href="_modules/jiratools.html#ConfigNotFoundException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.ConfigNotFoundException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception for config failure.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.add_comment">
+<code class="sig-prename descclassname">jiratools.</code><code class="sig-name descname">add_comment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jira_id</span></em>, <em class="sig-param"><span class="n">comment_text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools.html#add_comment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.add_comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a comment to the JIRA ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jira_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The JIRA ID to comment on.</p></li>
+<li><p><strong>comment_text</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The text to add as the comment body.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Comment</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A jira comment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.cli_jira_link">
+<code class="sig-prename descclassname">jiratools.</code><code class="sig-name descname">cli_jira_link</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools.html#cli_jira_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.cli_jira_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link two JIRAs as related.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.error_if">
+<code class="sig-prename descclassname">jiratools.</code><code class="sig-name descname">error_if</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">check</span></em>, <em class="sig-param"><span class="n">status</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">message</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools.html#error_if"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.error_if" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit the program if a provided check is true.</p>
+<p>Exit the program if the check is true.
+If a status is provided,
+that code is used for the exit code;
+otherwise the value from the check is used.
+An optional message for standard error can also be provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>check</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>) – Anything with truthiness that can determine
+if the program should exit or not</p></li>
+<li><p><strong>status</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Exit code to use for exit</p></li>
+<li><p><strong>message</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Message to print to standard error if check is True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.format_as_code_block">
+<code class="sig-prename descclassname">jiratools.</code><code class="sig-name descname">format_as_code_block</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text_to_wrap</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools.html#format_as_code_block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.format_as_code_block" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap the text in a JIRA code block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text_to_wrap</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The text to wrap.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JIRA formatted code block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.get_client">
+<code class="sig-prename descclassname">jiratools.</code><code class="sig-name descname">get_client</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools.html#get_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.get_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a configured JIRA client.</p>
+<p>Configured per the user’s home directory <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">JIRA</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-jiratools.error_logger">
+<span id="jiratools-error-logger-module"></span><h2>jiratools.error_logger module<a class="headerlink" href="#module-jiratools.error_logger" title="Permalink to this headline">¶</a></h2>
+<p>Error logging for jiratools.</p>
+<dl class="py class">
+<dt id="jiratools.error_logger.JiraEntry">
+<em class="property">class </em><code class="sig-prename descclassname">jiratools.error_logger.</code><code class="sig-name descname">JiraEntry</code><a class="reference internal" href="_modules/jiratools/error_logger.html#JiraEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.error_logger.JiraEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Typing mock for Jira Entry data.</p>
+<dl class="py attribute">
+<dt id="jiratools.error_logger.JiraEntry.error_message">
+<code class="sig-name descname">error_message</code><em class="property">: str</em><a class="headerlink" href="#jiratools.error_logger.JiraEntry.error_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="jiratools.error_logger.JiraEntry.jira_id">
+<code class="sig-name descname">jira_id</code><em class="property">: str</em><a class="headerlink" href="#jiratools.error_logger.JiraEntry.jira_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.error_logger.add_jira_comment_with_table">
+<code class="sig-prename descclassname">jiratools.error_logger.</code><code class="sig-name descname">add_jira_comment_with_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jira_id</span></em>, <em class="sig-param"><span class="n">data_headers</span></em>, <em class="sig-param"><span class="n">data_array</span></em>, <em class="sig-param"><span class="n">msg_prefix</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">format_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools/error_logger.html#add_jira_comment_with_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.error_logger.add_jira_comment_with_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a comment to a JIRA with a formatted data table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jira_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the Issue ID of the JIRA to be updated</p></li>
+<li><p><strong>data_headers</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – a list of header column names</p></li>
+<li><p><strong>data_array</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]) – <p>An array of lists of strings,
+representing table rows. e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>**format_kwargs</strong> – formatting keyword args
+to be passed to jiratools.formatting.format_jira_msg</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the Issue ID of the JIRA which received the comment</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.error_logger.add_jira_error_comment">
+<code class="sig-prename descclassname">jiratools.error_logger.</code><code class="sig-name descname">add_jira_error_comment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jira_id</span></em>, <em class="sig-param"><span class="n">error_msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">format_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools/error_logger.html#add_jira_error_comment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.error_logger.add_jira_error_comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a comment to a JIRA with a formatted error message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jira_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the Issue ID of the JIRA to be updated</p></li>
+<li><p><strong>error_msg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the raw error message to include in the comment</p></li>
+<li><p><strong>**format_kwargs</strong> – formatting keyword args
+to be passed to jiratools.formatting.format_jira_msg</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the Issue ID of the JIRA which received the comment</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.error_logger.update_jira_for_errors">
+<code class="sig-prename descclassname">jiratools.error_logger.</code><code class="sig-name descname">update_jira_for_errors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jiras</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">errors</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">format_kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools/error_logger.html#update_jira_for_errors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.error_logger.update_jira_for_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auto-Update JIRAs if errors are found that match the jira list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jiras</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<a class="reference internal" href="#jiratools.error_logger.JiraEntry" title="jiratools.error_logger.JiraEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">JiraEntry</span></code></a>]) – <p>an iterable of objects
+that each contain two required attributes</p>
+<ul>
+<li><p>jira_id: the Issue Id of the JIRA to be updated</p></li>
+<li><p>error_message: an error message substring which, if found,
+will trigger and update of the JIRA with the actual error message.</p></li>
+</ul>
+</p></li>
+<li><p><strong>*errors</strong> – an error message to be checked against the <code class="docutils literal notranslate"><span class="pre">jiras</span></code> for a match</p></li>
+<li><p><strong>**format_kwargs</strong> – formatting keyword args
+to be passed to jiratools.formatting.format_jira_msg</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of JIRA Issue IDs that were updated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jiratools.formatting">
+<span id="jiratools-formatting-module"></span><h2>jiratools.formatting module<a class="headerlink" href="#module-jiratools.formatting" title="Permalink to this headline">¶</a></h2>
+<p>Formatting helpers for jiratools.</p>
+<dl class="py function">
+<dt id="jiratools.formatting.format_as_jira_table">
+<code class="sig-prename descclassname">jiratools.formatting.</code><code class="sig-name descname">format_as_jira_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">headers</span></em>, <em class="sig-param"><span class="n">data_array</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools/formatting.html#format_as_jira_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.formatting.format_as_jira_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a JIRA table given headers and row data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>headers</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – a list of header column names</p></li>
+<li><p><strong>data_array</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]) – <p>An array of lists, representing table rows. e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a formatted JIRA table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="jiratools.formatting.format_autoupdate_jira_msg">
+<code class="sig-prename descclassname">jiratools.formatting.</code><code class="sig-name descname">format_autoupdate_jira_msg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message_body</span></em>, <em class="sig-param"><span class="n">header_body</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jiratools/formatting.html#format_autoupdate_jira_msg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#jiratools.formatting.format_autoupdate_jira_msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a JIRA message with useful headers.</p>
+<p>An “Automated JIRA Update” title will be added,
+as well as either a URL link if a <code class="docutils literal notranslate"><span class="pre">BUILD_URL</span></code> env variable is present,
+or a note indicating a manual run with user id otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message_body</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the body of the message</p></li>
+<li><p><strong>header_body</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – a header to be added with <code class="docutils literal notranslate"><span class="pre">h2</span></code> tag</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a formatted message with headers</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MAINTAINER.html" class="btn btn-neutral float-right" title="Maintainer’s Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="JiraTools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Brad Brown
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/85dbe2273352945e0e1290e2ada8fb3ba0d9e011">85dbe2273352945e0e1290e2ada8fb3ba0d9e011</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
