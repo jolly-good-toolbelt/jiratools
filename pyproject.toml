@@ -23,13 +23,13 @@ tomlkit = "^0.5.3"
 sphinx-autodoc-typehints = "^1.6"
 
 [tool.poetry.scripts]
+jiratool = "jiratools:main"
+jira-add-comment = "jiratools:add_comment"
+jira-example-config = "jiratools:example_config_install"
 jira-link-issues = "jiratools:jira_link"
 jira-make-linked-issue = "jiratools:make_linked"
-jira-add-comment = "jiratools:add_comment"
 jira-search-issues = "jiratools:search"
 jira-update-assignee = "jiratools:reassign"
-jira-example-config = "jiratools:example_config_install"
-jiratool = "jiratools:main"
 
 [build-system]
 requires = ["poetry>=0.12"]
