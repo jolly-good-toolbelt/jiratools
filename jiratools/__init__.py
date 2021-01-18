@@ -45,7 +45,7 @@ def _setup_link_parser(parser: ArgumentParser) -> ArgumentParser:
 
 
 def jira_link() -> None:
-    """Linke two JIRA from cli."""
+    """Link two JIRA from cli."""
     parser = _setup_link_parser(
         ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     )
