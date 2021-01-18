@@ -246,7 +246,7 @@ def example_config_install() -> None:
     )
     parser = _setup_config_parser(ArgumentParser(description=description))
     args = parser.parse_args()
-    cli_example_config(install=args.install)
+    cli_example_config(install=args.install, install_if_missing=args.install_if_missing)
 
 
 SUBPARSERS = {
