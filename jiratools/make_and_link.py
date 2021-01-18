@@ -36,7 +36,8 @@ def cli_make_linked(
         project_components = client.project_components(project)
         issue_data.update(
             components=[
-                {"id": component_id_from_name(project_components, x)}
+                # re-cast the provided list of names into a list of ID dicts
+                {"id": component_id_from_name(project_components, x)}  # type: ignore
                 for x in components
             ]
         )

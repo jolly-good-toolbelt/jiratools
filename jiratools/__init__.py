@@ -147,7 +147,7 @@ def make_linked() -> None:
         description=args.description,
         jira_id=args.jira_id,
         issue_type=args.issue_type,
-        watchers=args.watchers
+        watchers=args.watchers,
     )
 
 
