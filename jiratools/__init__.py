@@ -192,7 +192,7 @@ def _setup_search_parser(parser):
 
 
 def search() -> None:
-    """Place JQL search and return results."""
+    """Perform JQL search and return results."""
     parser = _setup_search_parser(
         ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     )

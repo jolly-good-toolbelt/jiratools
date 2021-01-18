@@ -13,4 +13,8 @@ def cli_reassign(jira_id: str, user: str) -> None:
     try:
         client.assign_issue(jira_id, user)
     except jira.exceptions.JIRAError as e:
-        print('ERROR: "{}" trying to assign a new user to the JIRA.'.format(e.text))
+        print(
+            'ERROR: "{}" trying to assign a new user to the JIRA "{}".'.format(
+                e.text, jira_id
+            )
+        )
