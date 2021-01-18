@@ -12,7 +12,7 @@ install:
 - "./env_setup.py"
 script:
 - "./self_check.py"
-- "./bin/ensure_config.sh | true"
+- "./bin/ensure_config.sh"
 - "./bin/build_docs.py"
 before_deploy:
 - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS

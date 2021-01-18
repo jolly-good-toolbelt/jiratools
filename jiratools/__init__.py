@@ -221,10 +221,16 @@ def reassign() -> None:
 
 
 def _setup_config_parser(parser: ArgumentParser) -> ArgumentParser:
-    parser.add_argument(
+    install_settings = parser.add_mutually_exclusive_group()
+    install_settings.add_argument(
         "--install",
         action="store_true",
-        help="Install the example config file unless you have one already",
+        help="Install the example config file, raise an error if it already exists.",
+    )
+    install_settings.add_argument(
+        "--install-if-missing",
+        action="store_true",
+        help="Install the example config file if it doesn't already exist.",
     )
     return parser
 
