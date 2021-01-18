@@ -57,6 +57,7 @@ def jira_link() -> None:
 
 def _setup_make_linked_parser(parser: ArgumentParser) -> ArgumentParser:
     config = load_config()
+    parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument("jira_id")
     assign_default = bool(config["DEFAULT_ASSIGNEE"])
     assignment = parser.add_mutually_exclusive_group()

@@ -41,7 +41,7 @@ def list_from_config(key_name: str) -> List[str]:
 
     """
     config = load_config()
-    return list(filter(None, [x.strip() for x in config.get(key_name, "").split(",")]))
+    return list(filter(None, (x.strip() for x in config.get(key_name, "").split(","))))
 
 
 def component_id_from_name(
