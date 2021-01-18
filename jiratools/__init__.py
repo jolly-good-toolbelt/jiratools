@@ -50,7 +50,9 @@ def jira_link() -> None:
         ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     )
     args = parser.parse_args()
-    cli_jira_link(args)
+    cli_jira_link(
+        link_type=args.link_type, from_jira=args.from_jira, to_jira=args.to_jira
+    )
 
 
 def _setup_make_linked_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -133,7 +135,19 @@ def make_linked() -> None:
     parser = _setup_make_linked_parser(
         ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     )
-    cli_make_linked(parser.parse_args())
+    args = parser.parse_args()
+    cli_make_linked(
+        project=args.project,
+        assign=args.assign,
+        user=args.user,
+        components=args.components,
+        labels=args.labels,
+        summary=args.summary,
+        description=args.description,
+        jira_id=args.jira_id,
+        issue_type=args.issue_type,
+        watchers=args.watchers
+    )
 
 
 def _setup_comment_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -153,7 +167,8 @@ def add_comment() -> None:
             formatter_class=RawDescriptionHelpFormatter, description=add_comment.__doc__
         )
     )
-    cli_add_comment(parser.parse_args())
+    args = parser.parse_args()
+    cli_add_comment(jira_id=args.jira_id, message=args.message)
 
 
 def _setup_search_parser(parser):
@@ -181,7 +196,10 @@ def search() -> None:
     parser = _setup_search_parser(
         ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     )
-    cli_search(parser.parse_args())
+    args = parser.parse_args()
+    cli_search(
+        query=args.query, max_results=args.max_results, count_only=args.count_only
+    )
 
 
 def _setup_reassign_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -198,7 +216,8 @@ def reassign() -> None:
             description=cli_add_comment.__doc__,
         )
     )
-    cli_reassign(parser.parse_args())
+    args = parser.parse_args()
+    cli_reassign(jira_id=args.jira_id, user=args.user)
 
 
 def _setup_config_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -219,7 +238,8 @@ def example_config_install() -> None:
         "contents to stdout."
     )
     parser = _setup_config_parser(ArgumentParser(description=description))
-    cli_example_config(parser.parse_args())
+    args = parser.parse_args()
+    cli_example_config(install=args.install)
 
 
 SUBPARSERS = {
@@ -243,4 +263,5 @@ def main() -> None:
         subparser = setup_parser(subparser)
         subparser.set_defaults(func=func)
     args = parser.parse_args()
-    args.func(args)
+    func_arg_dict = {k: v for k, v in vars(args).items() if k != "func"}
+    args.func(**func_arg_dict)

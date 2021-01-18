@@ -1,5 +1,4 @@
 """Add Comment command."""
-import argparse
 import sys
 
 import jira
@@ -7,15 +6,15 @@ import jira
 from .helpers import add_comment
 
 
-def cli_add_comment(args: argparse.Namespace) -> jira.resources.Comment:
+def cli_add_comment(jira_id: str, message: str) -> jira.resources.Comment:
     """Add comment to issue."""
-    if args.message == "-":
-        args.message = sys.stdin.read()
+    if message == "-":
+        message = sys.stdin.read()
         # Add a blank line for spacing.
         print()
 
-    print('Adding comment "{}" to "{}"'.format(args.message, args.jira_id))
+    print('Adding comment "{}" to "{}"'.format(message, jira_id))
     try:
-        add_comment(args.jira_id, args.message)
+        add_comment(jira_id, message)
     except jira.exceptions.JIRAError as e:
-        print('ERROR: "{}" for "{}"!'.format(e.text, args.jira_id))
+        print('ERROR: "{}" for "{}"!'.format(e.text, jira_id))
