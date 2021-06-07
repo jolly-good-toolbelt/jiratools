@@ -11,6 +11,7 @@ before_install:
 install:
 - ./bootstrap.sh
 script:
+- "./bin/ensure_config.sh"
 - self-check
 - build-docs
 before_deploy:
