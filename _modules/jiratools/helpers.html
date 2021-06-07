@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>jiratools.helpers &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jiratools.html">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.assignee">jiratools.assignee module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.comment">jiratools.comment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.do_search">jiratools.do_search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.example_config">jiratools.example_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.formatting">jiratools.formatting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.helpers">jiratools.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.link">jiratools.link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.make_and_link">jiratools.make_and_link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.utils">jiratools.utils module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jiratools.html">jiratools</a> &raquo;</li>
+        
+      <li>jiratools.helpers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jiratools.helpers</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A collection of helpers for JIRA commands.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">jira</span>
+<span class="kn">from</span> <span class="nn">jgt_common</span> <span class="kn">import</span> <span class="n">exit</span><span class="p">,</span> <span class="n">error_if</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">DEFAULT_LINK_TYPE</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_client</span><span class="p">,</span> <span class="n">load_config</span>
+
+
+<div class="viewcode-block" id="get_issue_by_id"><a class="viewcode-back" href="../../jiratools.html#jiratools.helpers.get_issue_by_id">[docs]</a><span class="k">def</span> <span class="nf">get_issue_by_id</span><span class="p">(</span><span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jira</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">Issue</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the JIRA of a given id, or exit if not found.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jira_id: the id of the desired JIRA</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the issue with the provided id</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dev_jira</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">issue</span><span class="p">(</span><span class="n">jira_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;JIRA </span><span class="si">{}</span><span class="s2"> was not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jira_id</span><span class="p">))</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dev_jira</span></div>
+
+
+<div class="viewcode-block" id="list_from_config"><a class="viewcode-back" href="../../jiratools.html#jiratools.helpers.list_from_config">[docs]</a><span class="k">def</span> <span class="nf">list_from_config</span><span class="p">(</span><span class="n">key_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a list from a comma-separated config file entry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key_name: the name of the key in the config</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        a list of string values</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key_name</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))))</span></div>
+
+
+<div class="viewcode-block" id="component_id_from_name"><a class="viewcode-back" href="../../jiratools.html#jiratools.helpers.component_id_from_name">[docs]</a><span class="k">def</span> <span class="nf">component_id_from_name</span><span class="p">(</span>
+    <span class="n">project_components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">jira</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">Component</span><span class="p">],</span> <span class="n">component_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrive the id of the compoment with the desired name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        project_components: a list of all components associated with a JIRA project</span>
+<span class="sd">        component_name: the name of the desired component</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the id of the matching component</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">project_components</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">component_name</span><span class="p">]</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;More than one component in project with name: </span><span class="si">{}</span><span class="s2">&quot;</span>
+    <span class="n">error_if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">component_name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="link_jiras"><a class="viewcode-back" href="../../jiratools.html#jiratools.helpers.link_jiras">[docs]</a><span class="k">def</span> <span class="nf">link_jiras</span><span class="p">(</span>
+    <span class="n">from_jira</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">to_jira</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">relation_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LINK_TYPE</span><span class="p">,</span>
+    <span class="n">client</span><span class="p">:</span> <span class="n">jira</span><span class="o">.</span><span class="n">JIRA</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a link between two JIRA issues.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        from_jira: a JIRA issue id</span>
+<span class="sd">        to_jira: a JIRA issue id</span>
+<span class="sd">        relation_type: the type of link relationship</span>
+<span class="sd">        client: the instantiated JIRA client</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the client Response</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">client</span> <span class="ow">or</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">create_issue_link</span><span class="p">(</span><span class="n">relation_type</span><span class="p">,</span> <span class="n">from_jira</span><span class="p">,</span> <span class="n">to_jira</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="add_comment"><a class="viewcode-back" href="../../jiratools.html#jiratools.helpers.add_comment">[docs]</a><span class="k">def</span> <span class="nf">add_comment</span><span class="p">(</span><span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">comment_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jira</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">Comment</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a comment to the JIRA ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jira_id: The JIRA ID to comment on.</span>
+<span class="sd">        comment_text: The text to add as the comment body.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A jira comment.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_client</span><span class="p">()</span><span class="o">.</span><span class="n">add_comment</span><span class="p">(</span><span class="n">jira_id</span><span class="p">,</span> <span class="n">comment_text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_for_valid_user"><a class="viewcode-back" href="../../jiratools.html#jiratools.helpers.check_for_valid_user">[docs]</a><span class="k">def</span> <span class="nf">check_for_valid_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ensure that a user exists, exit if not found.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        user: the user id</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_client</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jira</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">JIRAError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There was a problem finding user </span><span class="si">{}</span><span class="s2">. Error message: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Brown.
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0">ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

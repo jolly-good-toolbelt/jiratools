@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>jiratools.utils &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jiratools.html">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.assignee">jiratools.assignee module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.comment">jiratools.comment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.do_search">jiratools.do_search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.example_config">jiratools.example_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.formatting">jiratools.formatting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.helpers">jiratools.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.link">jiratools.link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.make_and_link">jiratools.make_and_link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.utils">jiratools.utils module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jiratools.html">jiratools</a> &raquo;</li>
+        
+      <li>jiratools.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jiratools.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Basic utility functions for JIRA tools.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">SectionProxy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">jira</span>
+<span class="kn">from</span> <span class="nn">jgt_common</span> <span class="kn">import</span> <span class="n">error_if</span>
+
+<span class="n">CONFIG_FILENAME</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;jira.config&quot;</span><span class="p">)</span>
+<span class="n">CONFIG</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">SAMPLE_CONFIG_FILENAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;jira.config.example&quot;</span>
+<span class="p">)</span>
+
+<span class="n">REQUIRED_KEYS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;JIRA_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;USERNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;PASSWORD&quot;</span><span class="p">,</span> <span class="s2">&quot;DEFAULT_ASSIGNEE&quot;</span><span class="p">,</span> <span class="s2">&quot;TEST_PROJECT&quot;</span><span class="p">)</span>
+<span class="n">DEFAULT_LINK_TYPE</span> <span class="o">=</span> <span class="s2">&quot;relates to&quot;</span>
+
+
+<div class="viewcode-block" id="ConfigNotFoundException"><a class="viewcode-back" href="../../jiratools.html#jiratools.utils.ConfigNotFoundException">[docs]</a><span class="k">class</span> <span class="nc">ConfigNotFoundException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exception for config failure.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="get_client"><a class="viewcode-back" href="../../jiratools.html#jiratools.utils.get_client">[docs]</a><span class="k">def</span> <span class="nf">get_client</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">jira</span><span class="o">.</span><span class="n">JIRA</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a configured JIRA client.</span>
+
+<span class="sd">    Configured per the user&#39;s home directory ``jira.config`` file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">load_config</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">CONFIG</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConfigNotFoundException</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">jira</span><span class="o">.</span><span class="n">JIRA</span><span class="p">(</span>
+        <span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;JIRA_URL&quot;</span><span class="p">],</span>
+        <span class="n">basic_auth</span><span class="o">=</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;USERNAME&quot;</span><span class="p">],</span> <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PASSWORD&quot;</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">client</span></div>
+
+
+<div class="viewcode-block" id="load_config"><a class="viewcode-back" href="../../jiratools.html#jiratools.utils.load_config">[docs]</a><span class="k">def</span> <span class="nf">load_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SectionProxy</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load CONFIG_FILENAME into CONFIG.</span>
+
+<span class="sd">    If not already loaded; call before touching CONFIG</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">CONFIG</span>
+    <span class="k">if</span> <span class="n">CONFIG</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CONFIG</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Config file &quot;</span><span class="si">{}</span><span class="s1">&quot; {{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">)</span>
+    <span class="n">error_if</span><span class="p">(</span><span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;not found&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">CONFIG_FILENAME</span><span class="p">)</span>
+    <span class="n">section_name</span> <span class="o">=</span> <span class="s2">&quot;jira&quot;</span>
+    <span class="n">error_if</span><span class="p">(</span>
+        <span class="n">section_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;missing &quot;</span><span class="si">{}</span><span class="s1">&quot; section&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="n">missing_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="n">section_name</span><span class="p">]]</span>
+    <span class="n">missing_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="s1">&#39;section &quot;</span><span class="si">{}</span><span class="s1">&quot; missing keys: {{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section_name</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">error_if</span><span class="p">(</span><span class="n">missing_keys</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">missing_message</span><span class="p">)</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">CONFIG</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Brown.
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0">ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

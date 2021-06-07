@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>jiratools.error_logger &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jiratools.html">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.assignee">jiratools.assignee module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.comment">jiratools.comment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.do_search">jiratools.do_search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.example_config">jiratools.example_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.formatting">jiratools.formatting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.helpers">jiratools.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.link">jiratools.link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.make_and_link">jiratools.make_and_link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.utils">jiratools.utils module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jiratools.html">jiratools</a> &raquo;</li>
+        
+      <li>jiratools.error_logger</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jiratools.error_logger</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Error logging for jiratools.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterable</span>
+
+<span class="kn">from</span> <span class="nn">jiratools</span> <span class="kn">import</span> <span class="n">format_as_code_block</span>
+<span class="kn">from</span> <span class="nn">jiratools.helpers</span> <span class="kn">import</span> <span class="n">add_comment</span>
+<span class="kn">from</span> <span class="nn">jiratools.formatting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DataArray</span><span class="p">,</span>
+    <span class="n">format_autoupdate_jira_msg</span><span class="p">,</span>
+    <span class="n">format_as_jira_table</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">DataHeaders</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="JiraEntry"><a class="viewcode-back" href="../../jiratools.html#jiratools.error_logger.JiraEntry">[docs]</a><span class="k">class</span> <span class="nc">JiraEntry</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Typing mock for Jira Entry data.&quot;&quot;&quot;</span>
+
+    <span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+<div class="viewcode-block" id="add_jira_error_comment"><a class="viewcode-back" href="../../jiratools.html#jiratools.error_logger.add_jira_error_comment">[docs]</a><span class="k">def</span> <span class="nf">add_jira_error_comment</span><span class="p">(</span><span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">error_msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">format_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a comment to a JIRA with a formatted error message.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jira_id: the Issue ID of the JIRA to be updated</span>
+<span class="sd">        error_msg: the raw error message to include in the comment</span>
+<span class="sd">        **format_kwargs: formatting keyword args</span>
+<span class="sd">            to be passed to jiratools.formatting.format_jira_msg</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the Issue ID of the JIRA which received the comment</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">add_comment</span><span class="p">(</span>
+        <span class="n">jira_id</span><span class="p">,</span>
+        <span class="n">format_autoupdate_jira_msg</span><span class="p">(</span><span class="n">format_as_code_block</span><span class="p">(</span><span class="n">error_msg</span><span class="p">),</span> <span class="o">**</span><span class="n">format_kwargs</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jira_id</span></div>
+
+
+<div class="viewcode-block" id="add_jira_comment_with_table"><a class="viewcode-back" href="../../jiratools.html#jiratools.error_logger.add_jira_comment_with_table">[docs]</a><span class="k">def</span> <span class="nf">add_jira_comment_with_table</span><span class="p">(</span>
+    <span class="n">jira_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data_headers</span><span class="p">:</span> <span class="n">DataHeaders</span><span class="p">,</span>
+    <span class="n">data_array</span><span class="p">:</span> <span class="n">DataArray</span><span class="p">,</span>
+    <span class="n">msg_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">format_kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a comment to a JIRA with a formatted data table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jira_id: the Issue ID of the JIRA to be updated</span>
+<span class="sd">        data_headers: a list of header column names</span>
+<span class="sd">        data_array: An array of lists of strings,</span>
+<span class="sd">            representing table rows. e.g.::</span>
+
+<span class="sd">            [[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], [&quot;d&quot;, &quot;e&quot;, &quot;f&quot;]]</span>
+
+<span class="sd">        **format_kwargs: formatting keyword args</span>
+<span class="sd">            to be passed to jiratools.formatting.format_jira_msg</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the Issue ID of the JIRA which received the comment</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message_with_table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">msg_prefix</span><span class="p">,</span> <span class="n">format_as_jira_table</span><span class="p">(</span><span class="n">data_headers</span><span class="p">,</span> <span class="n">data_array</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">add_comment</span><span class="p">(</span>
+        <span class="n">jira_id</span><span class="p">,</span> <span class="n">format_autoupdate_jira_msg</span><span class="p">(</span><span class="n">message_with_table</span><span class="p">,</span> <span class="o">**</span><span class="n">format_kwargs</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jira_id</span></div>
+
+
+<div class="viewcode-block" id="update_jira_for_errors"><a class="viewcode-back" href="../../jiratools.html#jiratools.error_logger.update_jira_for_errors">[docs]</a><span class="k">def</span> <span class="nf">update_jira_for_errors</span><span class="p">(</span>
+    <span class="n">jiras</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">JiraEntry</span><span class="p">],</span> <span class="o">*</span><span class="n">errors</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">format_kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Auto-Update JIRAs if errors are found that match the jira list.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jiras: an iterable of objects</span>
+<span class="sd">            that each contain two required attributes</span>
+
+<span class="sd">            - jira_id: the Issue Id of the JIRA to be updated</span>
+<span class="sd">            - error_message: an error message substring which, if found,</span>
+<span class="sd">              will trigger and update of the JIRA with the actual error message.</span>
+
+<span class="sd">        *errors: an error message to be checked against the ``jiras`` for a match</span>
+<span class="sd">        **format_kwargs: formatting keyword args</span>
+<span class="sd">            to be passed to jiratools.formatting.format_jira_msg</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of JIRA Issue IDs that were updated.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jiras_commented</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">jira</span> <span class="ow">in</span> <span class="n">jiras</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">jira</span><span class="o">.</span><span class="n">error_message</span> <span class="ow">and</span> <span class="n">jira</span><span class="o">.</span><span class="n">error_message</span> <span class="ow">in</span> <span class="n">error</span><span class="p">:</span>
+                <span class="n">jiras_commented</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">add_jira_error_comment</span><span class="p">(</span><span class="n">jira</span><span class="o">.</span><span class="n">jira_id</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="o">**</span><span class="n">format_kwargs</span><span class="p">)</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jiras_commented</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Brown.
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0">ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

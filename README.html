@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>JiraTools &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="jiratools.html">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.assignee">jiratools.assignee module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.comment">jiratools.comment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.do_search">jiratools.do_search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.example_config">jiratools.example_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.formatting">jiratools.formatting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.helpers">jiratools.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.link">jiratools.link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.make_and_link">jiratools.make_and_link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jiratools.html#module-jiratools.utils">jiratools.utils module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>JiraTools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="jiratools">
+<h1>JiraTools<a class="headerlink" href="#jiratools" title="Permalink to this headline">¶</a></h1>
+<p>Some simple API functions and command-line tools for interacting with JIRA.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>All the tools and functions here need your specific information from
+a <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> file in your home directory, so you have to do this setup
+before anything can be used:</p>
+<ul class="simple">
+<li><p>run <code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-config</span> <span class="pre">--install</span></code> to install an example config file
+(you can run it without <code class="docutils literal notranslate"><span class="pre">--install</span></code> to see the contents of what would be
+installed. (If you already have a <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> in your home directory,
+this script will <cite>not</cite> overwrite it, but raise an error.
+You may use <code class="docutils literal notranslate"><span class="pre">--install-if-missing</span></code> to continue without change silently
+if the file already exists.)</p></li>
+<li><p>Fill out the values in the config file with your appropriate data
+(see the comments in that file for guidance).</p></li>
+</ul>
+</div>
+<div class="section" id="command-line-tools">
+<h2>Command-Line Tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-config</span></code> can install an example config file for you, see above.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-linked</span></code> makes a new JIRA issue that is linked to an exisiting issue;
+the new issue’s fields can be set from defaults in your <code class="docutils literal notranslate"><span class="pre">jira.config</span></code>
+or those values can be overridden on the command line.
+See <code class="docutils literal notranslate"><span class="pre">--help</span></code> on this command for all the command line options,
+and the comments in <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> for setting the defaults.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">comment</span></code> adds a comment to a JIRA issue.
+The <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> file is needed to authenticate to JIRA.
+No other data from the <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> file is used by this commmand.
+See <code class="docutils literal notranslate"><span class="pre">--help</span></code> on this command for details. You can also use <code class="docutils literal notranslate"><span class="pre">-</span></code> as your comment
+and <code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">comment</span></code> will read the comment from stdin instead. Note that if you
+use <code class="docutils literal notranslate"><span class="pre">-</span></code> interactively, you cannot edit your comment before it is posted.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">search</span></code> searches JIRA using your JQL query.
+The <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> file is needed to authenticate to JIRA.
+You may set a default integer max_results value
+as <code class="docutils literal notranslate"><span class="pre">MAX_RESULT_COUNT</span></code> in <code class="docutils literal notranslate"><span class="pre">jira.config</span></code>,
+or set a value of <code class="docutils literal notranslate"><span class="pre">-1</span></code> for no max by default.
+See <code class="docutils literal notranslate"><span class="pre">--help</span></code> on this command for details.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">link</span></code> creates a link between two issues.
+The <code class="docutils literal notranslate"><span class="pre">jira.config</span></code> is needed to authenticate to JIRA.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">assign</span></code> changes the assignee of the JIRA to the provided user.</p>
+</div>
+<div class="section" id="error-logging-tools">
+<h2>Error Logging Tools<a class="headerlink" href="#error-logging-tools" title="Permalink to this headline">¶</a></h2>
+<p>These functions are designed to be used within Python code
+to assist with various error commenting logic.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratools.error_logging.add_jira_error_comment</span></code> can take an error
+and add a formatted comment to a relevant JIRA issue</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratools.error_logging.add_jira_comment_with_table</span></code> can add a comment
+with a formatted data table to a jira issue</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratools.error_logging.update_jira_for_errors</span></code> can check found errors
+against a list of JIRA issues
+and add comments to any JIRA issues where a match is found.</p></li>
+</ul>
+</div>
+<div class="section" id="formatting-tools">
+<h2>Formatting Tools<a class="headerlink" href="#formatting-tools" title="Permalink to this headline">¶</a></h2>
+<p>These functions are designed to be used within Python code
+to assist with comment formatting logic.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratools.formatting.format_autoupdate_jira_msg</span></code> takes a message body
+and add relevant title/header data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratools.formatting.format_as_jira_table</span></code> takes headers and table rows
+and formats a JIRA-style table</p></li>
+</ul>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">comment</span> <span class="pre">JIRA-1234</span> <span class="pre">&quot;Work</span> <span class="pre">in</span> <span class="pre">Progress.</span> <span class="pre">PR</span> <span class="pre">delayed</span> <span class="pre">by</span> <span class="pre">network</span> <span class="pre">problems.&quot;</span></code>
+– Add the comment to JIRA-1234 using the user/password from your <code class="docutils literal notranslate"><span class="pre">jira.config</span></code>
+Note that the comment has to be just one command line argument surrounded by quotes
+if it contains spaces, etc.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-linked</span> <span class="pre">JIRA-1234</span></code>
+– will create a JIRA in your <code class="docutils literal notranslate"><span class="pre">TEST_PROJECT</span></code> to test JIRA-1234,
+and link the two, assigning it to you and
+adding any watchers specified in your default watchers list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-linked</span> <span class="pre">JIRA-1234</span> <span class="pre">--project</span> <span class="pre">OTHER</span></code>
+– will create a test JIRA as above, but in <code class="docutils literal notranslate"><span class="pre">OTHER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-linked</span> <span class="pre">JIRA-1234</span> <span class="pre">--user</span> <span class="pre">bobm5523</span></code>
+– will create the JIRA as above, but assign to <code class="docutils literal notranslate"><span class="pre">bobm5523</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">make-linked</span> <span class="pre">JIRA-1234</span> <span class="pre">-w</span> <span class="pre">sall9987</span> <span class="pre">-w</span> <span class="pre">benj4444</span></code>
+– will create the JIRA and assign <code class="docutils literal notranslate"><span class="pre">sall9987</span></code> and <code class="docutils literal notranslate"><span class="pre">benj4444</span></code> as watchers
+instead of your default watcher list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">search</span> <span class="pre">&quot;project=ABC</span> <span class="pre">AND</span> <span class="pre">summary</span> <span class="pre">~</span> <span class="pre">client&quot;</span></code>
+– will print a list of links and titles for issues in project ABC
+that include the word “client” in the summary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jiratool</span> <span class="pre">link</span> <span class="pre">ABC-123</span> <span class="pre">XYZ-456</span></code>
+– will create a link such that <code class="docutils literal notranslate"><span class="pre">ABC-123</span></code> relates to <code class="docutils literal notranslate"><span class="pre">XYZ-456</span></code></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Brown.
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0">ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

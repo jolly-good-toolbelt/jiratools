@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>jiratools.formatting &mdash; jiratools - Simple helpers to interface to JIRA from an API or command line. 2.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> jiratools - Simple helpers to interface to JIRA from an API or command line.
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jiratools.html">jiratools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.assignee">jiratools.assignee module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.comment">jiratools.comment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.do_search">jiratools.do_search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.error_logger">jiratools.error_logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.example_config">jiratools.example_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.formatting">jiratools.formatting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.helpers">jiratools.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.link">jiratools.link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.make_and_link">jiratools.make_and_link module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jiratools.html#module-jiratools.utils">jiratools.utils module</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../MAINTAINER.html">Maintainer’s Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#top-level-scripts">Top-level scripts:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MAINTAINER.html#jgt-tools-scripts">JGT Tools scripts:</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">jiratools - Simple helpers to interface to JIRA from an API or command line.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../jiratools.html">jiratools</a> &raquo;</li>
+        
+      <li>jiratools.formatting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for jiratools.formatting</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Formatting helpers for jiratools.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="n">TableRowData</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+<span class="n">DataArray</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="n">TableRowData</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_build_source</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;BUILD_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;Manual run by </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()))</span>
+
+
+<div class="viewcode-block" id="format_autoupdate_jira_msg"><a class="viewcode-back" href="../../jiratools.html#jiratools.formatting.format_autoupdate_jira_msg">[docs]</a><span class="k">def</span> <span class="nf">format_autoupdate_jira_msg</span><span class="p">(</span>
+    <span class="n">message_body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">header_body</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Format a JIRA message with useful headers.</span>
+
+<span class="sd">    An &quot;Automated JIRA Update&quot; title will be added,</span>
+<span class="sd">    as well as either a URL link if a ``BUILD_URL`` env variable is present,</span>
+<span class="sd">    or a note indicating a manual run with user id otherwise.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        message_body: the body of the message</span>
+<span class="sd">        header_body: a header to be added with ``h2`` tag</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        a formatted message with headers</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;h2. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header_body</span><span class="p">)</span> <span class="k">if</span> <span class="n">header_body</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Automated JIRA Update:</span><span class="se">\n\n</span><span class="si">{}</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">_build_source</span><span class="p">(),</span> <span class="n">message_body</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="format_as_jira_table"><a class="viewcode-back" href="../../jiratools.html#jiratools.formatting.format_as_jira_table">[docs]</a><span class="k">def</span> <span class="nf">format_as_jira_table</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data_array</span><span class="p">:</span> <span class="n">DataArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a JIRA table given headers and row data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        headers: a list of header column names</span>
+<span class="sd">        data_array: An array of lists, representing table rows. e.g.::</span>
+
+<span class="sd">            [[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], [&quot;d&quot;, &quot;e&quot;, &quot;f&quot;]]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        a formatted JIRA table</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;||</span><span class="si">{}</span><span class="s2">||&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;||&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">headers</span><span class="p">))]</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">headers</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;|</span><span class="si">{}</span><span class="s2">|&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">d</span><span class="p">)))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_array</span><span class="p">]</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Brown.
+      <span class="build">
+        
+        Build
+        <a href="https://github.com/jolly-good-toolbelt/jiratools/tree/ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0">ee7c7cc79d8cdeb3b98aaf5db8a59c65b19cffc0</a>.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
