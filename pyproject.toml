@@ -10,13 +10,14 @@ documentation = "https://jolly-good-toolbelt.github.io/jiratools/"
 repository = "https://github.com/jolly-good-toolbelt/jiratools/"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6.1"
 jira = "^2.0"
 jgt_common = "^1.0"
 
 [tool.poetry.dev-dependencies]
 sphinx-autodoc-typehints = "^1.6"
 jgt_tools = "^0.4.0"
+pre-commit = "^2.9"
 
 [tool.poetry.scripts]
 jiratool = "jiratools:main"
